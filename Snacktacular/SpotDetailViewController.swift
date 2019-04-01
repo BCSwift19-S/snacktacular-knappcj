@@ -8,6 +8,8 @@
 
 import UIKit
 import GooglePlaces
+import MapKit
+import Contacts
 
 class SpotDetailViewController: UIViewController {
     
@@ -16,17 +18,27 @@ class SpotDetailViewController: UIViewController {
     @IBOutlet weak var averageRatingLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
     
     var spot: Spot!
-
+    let regionDistance: CLLocationDistance = 750 //meters
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //mapView.delegate = self
+        
         if spot == nil {
             spot = Spot()
+            getLocation()
         }
         nameField.text = spot.name
         addressField.text = spot.address
+        
+        let region = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        mapView.setRegion(region, animated: true)
     }
 
     @IBAction func photoButtonPressed(_ sender: UIButton) {
@@ -36,6 +48,8 @@ class SpotDetailViewController: UIViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        spot.name = nameField.text!
+        spot.address = addressField.text!
         spot.saveData { success in
             if success {
                 self.leaveViewController()
@@ -59,6 +73,13 @@ class SpotDetailViewController: UIViewController {
     func updateUserInterface() {
         nameField.text = spot.name
         addressField.text = spot.address
+        updateMap()
+    }
+    
+    func updateMap() {
+        mapView.removeAnnotation(mapView!.annotations as! MKAnnotation)
+        mapView.addAnnotation(spot)
+        mapView.setCenter(spot.coordinate, animated: true)
     }
     
     func leaveViewController() {
@@ -98,6 +119,64 @@ extension SpotDetailViewController: GMSAutocompleteViewControllerDelegate {
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+}
+
+extension SpotDetailViewController: CLLocationManagerDelegate {
+    
+    func getLocation(){
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+    }
+    
+    func handleLocationAuthorizationStatus(status: CLAuthorizationStatus){
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse :
+            locationManager.requestLocation()
+        case .denied:
+            print("Can't show Location, user has not authorized it")
+        case .restricted:
+            print("Parental controls")
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        handleLocationAuthorizationStatus(status: status)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard spot.name == "" else {
+            return
+        }
+        let geoCoder = CLGeocoder()
+        var name = ""
+        var address = ""
+        currentLocation = locations.last
+        spot.coordinate = currentLocation.coordinate
+        
+        geoCoder.reverseGeocodeLocation(currentLocation, completionHandler: {placemarks, error in
+            if placemarks != nil {
+                let placemark = placemarks?.last
+                name = placemark?.name ?? "Name Unkown"
+                if let postalAddress = placemark?.postalAddress {
+                address = CNPostalAddressFormatter.string(from: postalAddress, style: .mailingAddress)
+                } else {
+                    print("error: couldn't get localized description")
+                }
+            } else {
+                print("Error retrieving place. Error code: \(error!)")
+            }
+            self.spot.name = name
+            self.spot.address = address
+            self.updateUserInterface()
+        })
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("failed to get user's location")
     }
     
 }

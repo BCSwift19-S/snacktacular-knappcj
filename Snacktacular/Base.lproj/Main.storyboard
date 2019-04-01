@@ -241,15 +241,24 @@
                                             <action selector="photoButtonPressed:" destination="L7d-5i-Cie" eventType="touchUpInside" id="PEM-R9-pwO"/>
                                         </connections>
                                     </button>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TQ0-lu-1Cu">
+                                        <rect key="frame" x="0.0" y="55" width="375" height="180"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="180" id="9of-Iv-Rui"/>
+                                        </constraints>
+                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="TQ0-lu-1Cu" firstAttribute="top" secondItem="4WS-yq-rPw" secondAttribute="bottom" constant="2" id="9Lf-bZ-SU6"/>
+                                    <constraint firstItem="TQ0-lu-1Cu" firstAttribute="leading" secondItem="npF-xl-bxb" secondAttribute="leading" id="9XK-S3-t3p"/>
                                     <constraint firstItem="BPa-i5-pra" firstAttribute="leading" secondItem="4HJ-pv-dUi" secondAttribute="trailing" constant="8" id="A0R-CH-fci"/>
                                     <constraint firstAttribute="trailing" secondItem="BPa-i5-pra" secondAttribute="trailing" constant="6" id="HRH-z2-HBC"/>
                                     <constraint firstAttribute="trailing" secondItem="4WS-yq-rPw" secondAttribute="trailing" constant="8" id="NnN-Ek-k1W"/>
                                     <constraint firstAttribute="trailing" secondItem="JfI-qt-dbd" secondAttribute="trailing" id="Qux-Xh-N7Z"/>
                                     <constraint firstItem="JfI-qt-dbd" firstAttribute="top" secondItem="npF-xl-bxb" secondAttribute="top" constant="235" id="SaX-BG-c1z"/>
                                     <constraint firstItem="5Eo-jn-BIH" firstAttribute="leading" secondItem="npF-xl-bxb" secondAttribute="leading" constant="8" id="Sdy-zi-6G2"/>
+                                    <constraint firstAttribute="trailing" secondItem="TQ0-lu-1Cu" secondAttribute="trailing" id="dqR-gD-Jjt"/>
                                     <constraint firstItem="5Eo-jn-BIH" firstAttribute="top" secondItem="JfI-qt-dbd" secondAttribute="bottom" constant="13" id="gHB-Ot-vXD"/>
                                     <constraint firstItem="BPa-i5-pra" firstAttribute="top" secondItem="JfI-qt-dbd" secondAttribute="bottom" constant="7" id="gRn-ed-w4a"/>
                                     <constraint firstItem="JfI-qt-dbd" firstAttribute="leading" secondItem="npF-xl-bxb" secondAttribute="leading" id="ge6-Xs-fNb"/>
@@ -375,6 +384,7 @@
                         <outlet property="addressField" destination="4WS-yq-rPw" id="P0N-6s-snq"/>
                         <outlet property="averageRatingLabel" destination="B7N-4G-a6e" id="wSr-er-pBu"/>
                         <outlet property="collectionView" destination="JfI-qt-dbd" id="hnO-GP-dfz"/>
+                        <outlet property="mapView" destination="TQ0-lu-1Cu" id="d1m-kE-v3u"/>
                         <outlet property="nameField" destination="4QE-cW-8Sq" id="mlK-Cz-ISL"/>
                         <outlet property="tableView" destination="9OL-9e-xjv" id="3bb-n3-fTc"/>
                     </connections>
