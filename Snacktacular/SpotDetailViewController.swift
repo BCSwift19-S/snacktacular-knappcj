@@ -60,6 +60,8 @@ class SpotDetailViewController: UIViewController {
         }
     }
     
+    //commit
+    
     @IBAction func lookupPlacePressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
