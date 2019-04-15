@@ -20,6 +20,13 @@
 		F396168D224E9AE100CF2347 /* spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396168C224E9AE100CF2347 /* spot.swift */; };
 		F396168F224E9C6800CF2347 /* Spots.swift in Sources */ = {isa = PBXBuildFile; fileRef = F396168E224E9C6800CF2347 /* Spots.swift */; };
 		F3961691224FD0DD00CF2347 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3961690224FD0DD00CF2347 /* GoogleService-Info.plist */; };
+		F3965CE82263F7E500F46E4D /* Reviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3965CE72263F7E500F46E4D /* Reviews.swift */; };
+		F3965CEA22644BD900F46E4D /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3965CE922644BD900F46E4D /* Photo.swift */; };
+		F3965CEC22644C3400F46E4D /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3965CEB22644C3400F46E4D /* Photos.swift */; };
+		F3DDA43A226260080053B728 /* DoubleRoundTo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDA439226260080053B728 /* DoubleRoundTo.swift */; };
+		F3DDA43C226276180053B728 /* UIViewAddBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDA43B226276180053B728 /* UIViewAddBorder.swift */; };
+		F3DDA43E2263B5140053B728 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDA43D2263B5140053B728 /* ReviewViewController.swift */; };
+		F3DDA4402263C94E0053B728 /* review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DDA43F2263C94E0053B728 /* review.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +47,13 @@
 		F396168C224E9AE100CF2347 /* spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spot.swift; sourceTree = "<group>"; };
 		F396168E224E9C6800CF2347 /* Spots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spots.swift; sourceTree = "<group>"; };
 		F3961690224FD0DD00CF2347 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F3965CE72263F7E500F46E4D /* Reviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reviews.swift; sourceTree = "<group>"; };
+		F3965CE922644BD900F46E4D /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		F3965CEB22644C3400F46E4D /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		F3DDA439226260080053B728 /* DoubleRoundTo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRoundTo.swift; sourceTree = "<group>"; };
+		F3DDA43B226276180053B728 /* UIViewAddBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewAddBorder.swift; sourceTree = "<group>"; };
+		F3DDA43D2263B5140053B728 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		F3DDA43F2263C94E0053B728 /* review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = review.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +90,9 @@
 			isa = PBXGroup;
 			children = (
 				3E8390DF206597F600512DEA /* AppDelegate.swift */,
+				F3965CE72263F7E500F46E4D /* Reviews.swift */,
+				F3965CE922644BD900F46E4D /* Photo.swift */,
+				F3965CEB22644C3400F46E4D /* Photos.swift */,
 				F396168E224E9C6800CF2347 /* Spots.swift */,
 				F396168C224E9AE100CF2347 /* spot.swift */,
 				3E8390E1206597F600512DEA /* SpotsListViewController.swift */,
@@ -83,6 +100,10 @@
 				3E0F960B2065A17500AE450D /* SpotDetailViewController.swift */,
 				3E0F960D2065AB6400AE450D /* SpotReviewsTableViewCell.swift */,
 				3E0F960F2065AC1A00AE450D /* SpotPhotosCollectionViewCell.swift */,
+				F3DDA439226260080053B728 /* DoubleRoundTo.swift */,
+				F3DDA43B226276180053B728 /* UIViewAddBorder.swift */,
+				F3DDA43D2263B5140053B728 /* ReviewViewController.swift */,
+				F3DDA43F2263C94E0053B728 /* review.swift */,
 				3E8390E3206597F600512DEA /* Main.storyboard */,
 				3E8390E6206597F600512DEA /* Assets.xcassets */,
 				3E8390E8206597F600512DEA /* LaunchScreen.storyboard */,
@@ -304,13 +325,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3965CEA22644BD900F46E4D /* Photo.swift in Sources */,
+				F3965CE82263F7E500F46E4D /* Reviews.swift in Sources */,
 				3E8390E2206597F600512DEA /* SpotsListViewController.swift in Sources */,
+				F3965CEC22644C3400F46E4D /* Photos.swift in Sources */,
 				3E0F96102065AC1A00AE450D /* SpotPhotosCollectionViewCell.swift in Sources */,
 				3E0F960C2065A17500AE450D /* SpotDetailViewController.swift in Sources */,
 				F396168D224E9AE100CF2347 /* spot.swift in Sources */,
 				3E0F960E2065AB6400AE450D /* SpotReviewsTableViewCell.swift in Sources */,
+				F3DDA4402263C94E0053B728 /* review.swift in Sources */,
 				3E0F960A20659D9000AE450D /* SpotsTableViewCell.swift in Sources */,
+				F3DDA43E2263B5140053B728 /* ReviewViewController.swift in Sources */,
+				F3DDA43C226276180053B728 /* UIViewAddBorder.swift in Sources */,
 				3E8390E0206597F600512DEA /* AppDelegate.swift in Sources */,
+				F3DDA43A226260080053B728 /* DoubleRoundTo.swift in Sources */,
 				F396168F224E9C6800CF2347 /* Spots.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

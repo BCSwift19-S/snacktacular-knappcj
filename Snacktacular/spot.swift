@@ -27,7 +27,9 @@ class Spot: NSObject, MKAnnotation {
     var latitude: CLLocationDegrees {
         return coordinate.latitude
     }
-    
+    var location: CLLocation {
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
     var title: String? {
         return name
     }
@@ -37,7 +39,7 @@ class Spot: NSObject, MKAnnotation {
     }
     
     var dictionary: [String: Any] {
-        return ["name": name, "address": address, "longitude": longitude, "latitude": latitude, "averageRating": averageRating, "numberOfReviews": numberOfReviews, "postingUserID": postingUserID, "documentID": documentID,]
+        return ["name": name, "address": address, "longitude": longitude, "latitude": latitude, "averageRating": averageRating, "numberOfReviews": numberOfReviews, "postingUserID": postingUserID, "documentID": documentID]
     }
     init(name: String, address: String, coordinate: CLLocationCoordinate2D, averageRating: Double, numberOfReviews: Int, postingUserID: String, documentID: String) {
         self.name = name
@@ -82,7 +84,7 @@ class Spot: NSObject, MKAnnotation {
             }
         } else {
             var ref: DocumentReference? = nil
-            ref = db.collection("spots").addDocument(data: dataToSave) { (error) in
+            ref = db.collection("spots").addDocument(data: dataToSave) { error in
                 if let error = error {
                     completed(false)
                 } else {
