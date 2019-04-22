@@ -91,6 +91,7 @@
 			children = (
 				3E8390DF206597F600512DEA /* AppDelegate.swift */,
 				F3965CE72263F7E500F46E4D /* Reviews.swift */,
+				F3DDA43F2263C94E0053B728 /* review.swift */,
 				F3965CE922644BD900F46E4D /* Photo.swift */,
 				F3965CEB22644C3400F46E4D /* Photos.swift */,
 				F396168E224E9C6800CF2347 /* Spots.swift */,
@@ -103,7 +104,6 @@
 				F3DDA439226260080053B728 /* DoubleRoundTo.swift */,
 				F3DDA43B226276180053B728 /* UIViewAddBorder.swift */,
 				F3DDA43D2263B5140053B728 /* ReviewViewController.swift */,
-				F3DDA43F2263C94E0053B728 /* review.swift */,
 				3E8390E3206597F600512DEA /* Main.storyboard */,
 				3E8390E6206597F600512DEA /* Assets.xcassets */,
 				3E8390E8206597F600512DEA /* LaunchScreen.storyboard */,

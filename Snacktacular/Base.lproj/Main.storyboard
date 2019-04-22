@@ -689,12 +689,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="8v2-5F-rJe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GXG-9k-oJn">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="GXG-9k-oJn">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="ltd-Gy-SVd" id="llV-gi-2hE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="uSC-lm-zwJ">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="uSC-lm-zwJ">
                             <connections>
                                 <action selector="saveButtonPressed:" destination="ltd-Gy-SVd" id="LEb-wB-WFI"/>
                             </connections>

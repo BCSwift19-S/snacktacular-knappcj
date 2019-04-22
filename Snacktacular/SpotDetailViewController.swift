@@ -43,7 +43,7 @@ class SpotDetailViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         imagePicker.delegate = self
-
+        
         if spot == nil {
             spot = Spot()
             getLocation()
@@ -77,6 +77,20 @@ class SpotDetailViewController: UIViewController {
         
         reviews.loadData(spot: spot) {
             self.tableView.reloadData()
+            if self.reviews.reviewArray.count > 0 {
+                var total = 0
+                for review in self.reviews.reviewArray {
+                    total = total + review.rating
+                }
+                let average = Double(total) / Double(self.reviews.reviewArray.count)
+                self.averageRatingLabel.text = "\(average.roundTo(places: 1))"
+            } else {
+                self.averageRatingLabel.text = "-.-"
+            }
+        }
+        
+        photos.loadData(spot: spot) {
+            self.collectionView.reloadData()
         }
     }
     
@@ -88,8 +102,8 @@ class SpotDetailViewController: UIViewController {
             let navigationController = segue.destination as! UINavigationController
             let destination = navigationController.viewControllers.first as! ReviewViewController
             destination.spot = spot
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selectedIndexPath, animated: true)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndexPath, animated: true)
             }
         case "ShowReview":
             let destination = segue.destination as! ReviewViewController
@@ -101,6 +115,15 @@ class SpotDetailViewController: UIViewController {
             
         }
         
+    }
+    
+    func disableTextEditing() {
+        nameField.backgroundColor = UIColor.clear
+        nameField.isEnabled = false
+        nameField.noBorder()
+        addressField.backgroundColor = UIColor.clear
+        addressField.isEnabled = false
+        addressField.noBorder()
     }
     
     @IBAction func textFieldEditingChanged(_ sender: UITextField) {
@@ -115,10 +138,19 @@ class SpotDetailViewController: UIViewController {
     
     
     @IBAction func photoButtonPressed(_ sender: UIButton) {
-        cameraOrLibraryAlert()
+        if spot.documentID == "" {
+            saveCancelAlert(title: "This Venue Has Not Been Saved", message: "You must save this venue before you can add a photo.", segueIdentifier: "AddReview")
+        } else{
+            cameraOrLibraryAlert()
+        }
     }
     
     @IBAction func reviewButtonPressed(_ sender: UIButton) {
+        if spot.documentID == "" {
+            saveCancelAlert(title: "This Venue Has Not Been Saved", message: "You must save this venue before you review it.", segueIdentifier: "AddPhoto")
+        } else{
+        performSegue(withIdentifier: "AddReview", sender: nil)
+        }
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
@@ -132,8 +164,6 @@ class SpotDetailViewController: UIViewController {
             }
         }
     }
-    
-    //commit
     
     @IBAction func lookupPlacePressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()
@@ -165,6 +195,34 @@ class SpotDetailViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    func saveCancelAlert(title: String, message: String, segueIdentifier: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
+            self.spot.saveData { success in
+                self.saveBarButton.title = "Done"
+                self.cancelBarButton.title = ""
+                self.navigationController?.setToolbarHidden(true, animated: true)
+                self.disableTextEditing()
+                if segueIdentifier == "AddReview" {
+                    self.performSegue(withIdentifier: segueIdentifier, sender: nil)
+                } else {
+                    self.cameraOrLibraryAlert()
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+    }
     func cameraOrLibraryAlert() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { _ in
@@ -179,7 +237,7 @@ class SpotDetailViewController: UIViewController {
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
-    }
+}
 extension SpotDetailViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
@@ -302,6 +360,8 @@ extension SpotDetailViewController: UINavigationControllerDelegate, UIImagePicke
         photo.image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         photos.photoArray.append(photo)
         dismiss(animated: true) {
+            photo.saveData(spot: self.spot) { (success) in
+            }
             self.collectionView.reloadData()
         }
     }
